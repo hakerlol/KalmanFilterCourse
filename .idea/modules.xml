@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/KalmanFilterCourse.iml" filepath="$PROJECT_DIR$/KalmanFilterCourse.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/poi-ooxml.iml" filepath="$PROJECT_DIR$/.idea/poi-ooxml.iml" />
     </modules>
   </component>
 </project>

@@ -1,9 +1,11 @@
 package com.company.com.company.KalmanFilter;
 
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+//import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.DateUtil;
 import org.apache.poi.ss.usermodel.Workbook;
+
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -15,10 +17,9 @@ public class ArrayParse {
 
     public ArrayParse() throws IOException {
         FileInputStream fis = new FileInputStream("C:/Users/UrBrain/Desktop/excel/Dannye_axelerometr_giroskop.xls");
-        wb = new HSSFWorkbook(fis);
+         wb = new HSSFWorkbook(fis);
         fis.close();
     }
-
 
     public ArrayList<Integer> arrayEmptyCells() {
         ArrayList<Integer> amountOfEmpties = new ArrayList<>();
