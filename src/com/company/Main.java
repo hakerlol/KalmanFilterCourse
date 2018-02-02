@@ -1,25 +1,27 @@
 package com.company;
 
 import com.company.com.company.KalmanFilter.ArrayParse;
-import com.company.com.company.KalmanFilter.XSSFWorkbook;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.DateUtil;
-import org.apache.poi.ss.usermodel.Workbook;
+import com.company.com.company.KalmanFilter.Reader;
 
-import java.io.FileInputStream;
+import javax.swing.*;
 import java.io.IOException;
-import java.util.ArrayList;
+
 
 public class Main {
 
+
     public static void main(String[] args) throws IOException {
-        ArrayParse arrayParse = new ArrayParse();
+        Reader reader = new Reader("Прога");
+        reader.pack();
+
+        reader.setVisible(true);
+        reader.setSize(1280, 720);
+        reader.setResizable(false);
+        reader.setLocationRelativeTo(null);
 
 
-
-/*       for (int i = 0; i < arrayParse.arrayEmptyCells().size(); i++) {
-            System.out.println(arrayParse.arrayEmptyCells().get(i));
+     /*   for (int i = 0; i < arrayParse.arrayEmptyCells().length; i++) {
+            System.out.println(arrayParse.arrayEmptyCells()[i]);
         }*/
 
        /* for (int i = 0; i < arrayParse.arrayEmptyCells().size();i++){
@@ -32,7 +34,6 @@ public class Main {
         Workbook wb = new HSSFWorkbook(fis);
         ArrayList<Double> list = new ArrayList<>();
         fis.close();
-        System.out.println(wb.getSheetAt(0).getLastRowNum());
-        System.out.println(wb.getSheetAt(4).getLastRowNum());*/
+        System.out.println(wb.getSheetAt(0).getLastRowNum());*/
     }
 }

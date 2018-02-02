@@ -1,53 +1,40 @@
 package com.company.com.company.KalmanFilter;
 
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-//import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.DateUtil;
 import org.apache.poi.ss.usermodel.Workbook;
 
-
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.Arrays;
 
 public class ArrayParse {
-    ArrayList<Integer> list = new ArrayList<>();
-    Workbook wb;
+
+    private double[] elements;
+    private Workbook wb;
 
     public ArrayParse() throws IOException {
         FileInputStream fis = new FileInputStream("C:/Users/UrBrain/Desktop/excel/Dannye_axelerometr_giroskop.xls");
-         wb = new HSSFWorkbook(fis);
+        wb = new HSSFWorkbook(fis);
         fis.close();
     }
 
-    public ArrayList<Integer> arrayEmptyCells() {
-        ArrayList<Integer> amountOfEmpties = new ArrayList<>();
+    public double[] arrayEmptyCells() {
+        int newStart = 0;
 
         for (int i = 1; i < wb.getSheetAt(0).getLastRowNum(); i++) {
             if (!isNumeric(getCellText(wb.getSheetAt(0).getRow(i).getCell(0)))) {
-                amountOfEmpties.add(i);
+                newStart = i;
+                break;
             }
         }
-        return amountOfEmpties;
-    }
-
-    public ArrayList createListOfLists() {
-        ArrayList<ArrayList<Double>> arrayList = new ArrayList<>();
-        for (int i = 0; i < arrayEmptyCells().size(); i++) {
-            arrayList.add(new ArrayList<>());
+        elements = new double[newStart];
+        for (int i = 1; i < newStart; i++) {
+            elements[i] = Double.parseDouble(getCellText(wb.getSheetAt(0).getRow(i).getCell(0)));
         }
-
-        for (int i = 0; i < arrayEmptyCells().size(); i++){
-            for(int k = 0; k < arrayEmptyCells().get(i);k++){
-                arrayList.get(i).add(Double.parseDouble(getCellText(wb.getSheetAt(0).getRow(k).getCell(0))));
-            }
-        }
-
-        return arrayList;
+        return elements;
     }
-
-
 
     public static boolean isNumeric(String s) {
         try {
@@ -79,5 +66,9 @@ public class ArrayParse {
         } catch (NullPointerException e) {
             return "";
         }
+    }
+    @Override
+    public String toString() {
+        return "{" + Arrays.toString(elements) + "}";
     }
 }
