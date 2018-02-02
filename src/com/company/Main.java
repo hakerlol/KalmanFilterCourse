@@ -1,11 +1,7 @@
 package com.company;
 
-import com.company.com.company.KalmanFilter.ArrayParse;
 import com.company.com.company.KalmanFilter.Reader;
-
-import javax.swing.*;
 import java.io.IOException;
-
 
 public class Main {
 
@@ -15,7 +11,7 @@ public class Main {
         reader.pack();
 
         reader.setVisible(true);
-        reader.setSize(1280, 720);
+        reader.setSize(400, 300);
         reader.setResizable(false);
         reader.setLocationRelativeTo(null);
 
