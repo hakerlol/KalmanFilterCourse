@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/KalmanFilterCourse.iml" filepath="$PROJECT_DIR$/KalmanFilterCourse.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/poi-ooxml.iml" filepath="$PROJECT_DIR$/.idea/poi-ooxml.iml" />
+      <module fileurl="file://$PROJECT_DIR$/KalmanFinal.iml" filepath="$PROJECT_DIR$/KalmanFinal.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/jzy3d-master.iml" filepath="$PROJECT_DIR$/.idea/jzy3d-master.iml" />
     </modules>
   </component>
 </project>
