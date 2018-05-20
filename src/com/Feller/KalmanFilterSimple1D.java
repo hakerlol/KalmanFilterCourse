@@ -1,30 +1,30 @@
 package com.Feller;
 
-public class KalmanFilterSimple1D {
-    public double X0;  // predicted state
-    public double P0;  // predicted covariance
+class KalmanFilterSimple1D {
+    private double X0;  // predicted state
+    private double P0;  // predicted covariance
 
-    public double F;  // factor of real value to previous real value
-    public double Q;  // measurement noise
-    public double H;  // factor of measured value to real value
-    public double R;  // environment noise
+    private double F;  // factor of real value to previous real value
+    private double Q;  // measurement noise
+    private double H;  // factor of measured value to real value
+    private double R;  // environment noise
 
-    public double State;
-    public double Covariance;
+    double State;
+    private double Covariance;
 
-    public KalmanFilterSimple1D(double q, double r, double f, double h) {
+    KalmanFilterSimple1D(double q, double r, double f, double h) {
         Q = q;
         R = r;
         F = f;
         H = h;
     }
 
-    public void SetState(double state, double covariance) {
+    void SetState(double state, double covariance) {
         State = state;
         Covariance = covariance;
     }
 
-    public void Correct(double data) {
+    void Correct(double data) {
         //time update - prediction
         X0 = F * State;
         P0 = F * Covariance * F + Q;

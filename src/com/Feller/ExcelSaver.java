@@ -4,11 +4,6 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Workbook;
 
-import javax.swing.*;
-import javax.swing.filechooser.FileNameExtensionFilter;
-import java.io.FileOutputStream;
-import java.io.IOException;
-
 public class ExcelSaver implements Runnable {
     //  Workbook workbook = new HSSFWorkbook();
     // создание листа с названием "Просто лист"
