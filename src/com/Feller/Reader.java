@@ -914,7 +914,7 @@ public class Reader extends JFrame {
 
                     final XYPlot plot = xyLineChart.getXYPlot();
                     XYLineAndShapeRenderer renderer = new XYLineAndShapeRenderer();
-                    renderer.setBaseShapesVisible(false);
+                    renderer.setDefaultShapesVisible(false);
                     renderer.setSeriesPaint(0, Color.RED);
                     renderer.setSeriesPaint(1, Color.green);
                     renderer.setSeriesPaint(2, Color.black);
@@ -964,7 +964,7 @@ public class Reader extends JFrame {
 
                     final XYPlot plot = xyLineChart.getXYPlot();
                     XYLineAndShapeRenderer renderer = new XYLineAndShapeRenderer();
-                    renderer.setBaseShapesVisible(false);
+                    renderer.setDefaultShapesVisible(false);
                     renderer.setSeriesPaint(0, Color.RED);
                     renderer.setSeriesPaint(1, Color.green);
                     renderer.setSeriesPaint(2, Color.black);
@@ -1034,7 +1034,8 @@ public class Reader extends JFrame {
 
                     final XYPlot plot = xyLineChart.getXYPlot();
                     XYLineAndShapeRenderer renderer = new XYLineAndShapeRenderer();
-                    renderer.setBaseShapesVisible(false);
+                    renderer.setDefaultShapesVisible(false);
+                  //  renderer.setBaseShapesVisible(false);
                     renderer.setSeriesPaint(0, Color.RED);
                     renderer.setSeriesPaint(1, Color.green);
                     renderer.setSeriesPaint(2, Color.black);
@@ -1102,7 +1103,7 @@ public class Reader extends JFrame {
 
                     final XYPlot plot = xyLineChart.getXYPlot();
                     XYLineAndShapeRenderer renderer = new XYLineAndShapeRenderer();
-                    renderer.setBaseShapesVisible(false);
+                    renderer.setDefaultShapesVisible(false);
                     renderer.setSeriesPaint(0, Color.RED);
                     renderer.setSeriesPaint(1, Color.green);
                     renderer.setSeriesPaint(2, Color.black);
