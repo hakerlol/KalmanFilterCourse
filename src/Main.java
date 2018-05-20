@@ -10,3 +10,4 @@ public class Main {
         reader.setLocationRelativeTo(null);
     }
 }
+

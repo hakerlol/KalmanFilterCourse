@@ -320,51 +320,16 @@ public class Reader extends JFrame {
         System.out.println("all arr war created");
 
         for (int i = 1; i <= lastRowNum; i++) {
-            elementsAX[i - 1] = Double.parseDouble(getCellText(wb.getSheetAt(0).getRow(i).getCell(0)));
-            elementsAY[i - 1] = Double.parseDouble(getCellText(wb.getSheetAt(0).getRow(i).getCell(1)));
-            elementsAZ[i - 1] = Double.parseDouble(getCellText(wb.getSheetAt(0).getRow(i).getCell(2)));
-            elementsGX[i - 1] = Double.parseDouble(getCellText(wb.getSheetAt(0).getRow(i).getCell(3)));
-            elementsGY[i - 1] = Double.parseDouble(getCellText(wb.getSheetAt(0).getRow(i).getCell(4)));
-            elementsGZ[i - 1] = Double.parseDouble(getCellText(wb.getSheetAt(0).getRow(i).getCell(5)));
+            elementsAX[i - 1] = Double.parseDouble(getCellText(wb.getSheetAt(0).getRow(i).getCell(0))) / 16384 * 9.8;
+            elementsAY[i - 1] = Double.parseDouble(getCellText(wb.getSheetAt(0).getRow(i).getCell(1))) / 16384 * 9.8;
+            elementsAZ[i - 1] = Double.parseDouble(getCellText(wb.getSheetAt(0).getRow(i).getCell(2))) / 16384 * 9.8;
+            elementsGX[i - 1] = Double.parseDouble(getCellText(wb.getSheetAt(0).getRow(i).getCell(3))) / 131;
+            elementsGY[i - 1] = Double.parseDouble(getCellText(wb.getSheetAt(0).getRow(i).getCell(4))) / 131;
+            elementsGZ[i - 1] = Double.parseDouble(getCellText(wb.getSheetAt(0).getRow(i).getCell(5))) / 131;
             System.out.println("data filled");
         }
     }
 
-   /* private void useKalmanFilter() {
-        DoingKalman doing = new DoingKalman();
-
-        for (int i = 0; i < lastRowNum; i++) {
-            elementsAXAfterKalman[i] = doing.makeKalman(elementsAX)[i];
-            elementsAYAfterKalman[i] = doing.makeKalman(elementsAY)[i];
-            elementsAZAfterKalman[i] = doing.makeKalman(elementsAZ)[i];
-            elementsGXAfterKalman[i] = doing.makeKalman(elementsGX)[i];
-            elementsGYAfterKalman[i] = doing.makeKalman(elementsGY)[i];
-            elementsGZAfterKalman[i] = doing.makeKalman(elementsGZ)[i];
-        }
-
-        isKalmanDone = true;
-    }*/
-
-  /*  private void useSmoothFilterTypeA() {
-        SimpleMovingAverage simpleMovingAverage = new SimpleMovingAverage();
-
-        for (int i = 0; i < lastRowNum; i++) {
-            elementsAXAfterSmooth[i] = simpleMovingAverage.Smooth(elementsAX, (int) smoothWindowTypeA.getSelectedItem())[i];
-            elementsAYAfterSmooth[i] = simpleMovingAverage.Smooth(elementsAY, (int) smoothWindowTypeA.getSelectedItem())[i];
-            elementsAZAfterSmooth[i] = simpleMovingAverage.Smooth(elementsAZ, (int) smoothWindowTypeA.getSelectedItem())[i];
-
-        }
-    }
-
-    private void useSmoothFilterTypeG() {
-        SimpleMovingAverage simpleMovingAverage = new SimpleMovingAverage();
-
-        for (int i = 0; i < lastRowNum; i++) {
-            elementsGXAfterSmooth[i] = simpleMovingAverage.Smooth(elementsGX, (int) smoothWindowTypeG.getSelectedItem())[i];
-            elementsGYAfterSmooth[i] = simpleMovingAverage.Smooth(elementsGY, (int) smoothWindowTypeG.getSelectedItem())[i];
-            elementsGZAfterSmooth[i] = simpleMovingAverage.Smooth(elementsGZ, (int) smoothWindowTypeG.getSelectedItem())[i];
-        }
-    }*/
 
     private XYDataset createDatasetTypeA() {
         System.out.println("Start of A method");
@@ -658,7 +623,7 @@ public class Reader extends JFrame {
         return dataSet;
     }
 
-    private void setAFormsVisible(){
+    private void setAFormsVisible() {
         AX.setState(true);
         AY.setState(true);
         AZ.setState(true);
@@ -673,7 +638,7 @@ public class Reader extends JFrame {
         pointsAZafterFiltration.setState(false);
     }
 
-    private void setGFormsVisible(){
+    private void setGFormsVisible() {
         GX.setState(true);
         GY.setState(true);
         GZ.setState(true);
@@ -688,7 +653,7 @@ public class Reader extends JFrame {
         pointsGZafterFiltration.setState(false);
     }
 
-    private void setAActionListener(XYLineAndShapeRenderer renderer){
+    private void setAActionListener(XYLineAndShapeRenderer renderer) {
         AX.addActionListener(e1 -> {
             if (GX.getState()) {
                 renderer.setSeriesLinesVisible(0, true);
@@ -784,7 +749,7 @@ public class Reader extends JFrame {
         });
     }
 
-    private void setGActionListener(XYLineAndShapeRenderer renderer){
+    private void setGActionListener(XYLineAndShapeRenderer renderer) {
         GX.addActionListener(e1 -> {
             if (GX.getState()) {
                 renderer.setSeriesLinesVisible(0, true);
@@ -898,7 +863,7 @@ public class Reader extends JFrame {
                     JFreeChart xyLineChart = ChartFactory.createXYLineChart(
                             "Фильтрация методом Калмана",
                             "Номер измеренения",
-                            "Величина измерения",
+                            "град/сек",
                             createDatasetTypeG(),
                             PlotOrientation.VERTICAL,
                             true, true, false);
@@ -949,7 +914,7 @@ public class Reader extends JFrame {
                     JFreeChart xyLineChart = ChartFactory.createXYLineChart(
                             "Фильтрация методом Калмана",
                             "Номер измеренения",
-                            "Величина измерения",
+                            "м/с^2",
                             createDatasetTypeA(),
                             PlotOrientation.VERTICAL,
                             true, true, false);
@@ -1002,7 +967,7 @@ public class Reader extends JFrame {
                         xyLineChart = ChartFactory.createXYLineChart(
                                 "Фильтрация методом скользящего среднего",
                                 "Номер измеренения",
-                                "Величина измерения",
+                                "м/с^2",
                                 createSmoothFilterDataTypeA3(),
                                 PlotOrientation.VERTICAL,
                                 true, true, false);
@@ -1010,7 +975,7 @@ public class Reader extends JFrame {
                         xyLineChart = ChartFactory.createXYLineChart(
                                 "Фильтрация методом скользящего среднего",
                                 "Номер измеренения",
-                                "Величина измерения",
+                                "м/с^2",
                                 createSmoothFilterDataTypeA5(),
                                 PlotOrientation.VERTICAL,
                                 true, true, false);
@@ -1018,7 +983,7 @@ public class Reader extends JFrame {
                         xyLineChart = ChartFactory.createXYLineChart(
                                 "Фильтрация методом скользящего среднего",
                                 "Номер измеренения",
-                                "Величина измерения",
+                                "м/с^2",
                                 createSmoothFilterDataTypeA7(),
                                 PlotOrientation.VERTICAL,
                                 true, true, false);
@@ -1035,7 +1000,6 @@ public class Reader extends JFrame {
                     final XYPlot plot = xyLineChart.getXYPlot();
                     XYLineAndShapeRenderer renderer = new XYLineAndShapeRenderer();
                     renderer.setDefaultShapesVisible(false);
-                  //  renderer.setBaseShapesVisible(false);
                     renderer.setSeriesPaint(0, Color.RED);
                     renderer.setSeriesPaint(1, Color.green);
                     renderer.setSeriesPaint(2, Color.black);
@@ -1071,7 +1035,7 @@ public class Reader extends JFrame {
                         xyLineChart = ChartFactory.createXYLineChart(
                                 "Фильтрация методом скользящего среднего с окном 3",
                                 "Номер измеренения",
-                                "Величина измерения",
+                                "град/сек",
                                 createSmoothFilterDataTypeG3(),
                                 PlotOrientation.VERTICAL,
                                 true, true, false);
@@ -1079,7 +1043,7 @@ public class Reader extends JFrame {
                         xyLineChart = ChartFactory.createXYLineChart(
                                 "Фильтрация методом скользящего среднего с окном 5",
                                 "Номер измеренения",
-                                "Величина измерения",
+                                "град/сек",
                                 createSmoothFilterDataTypeG5(),
                                 PlotOrientation.VERTICAL,
                                 true, true, false);
@@ -1087,7 +1051,7 @@ public class Reader extends JFrame {
                         xyLineChart = ChartFactory.createXYLineChart(
                                 "Фильтрация методом скользящего среднего с окном 7",
                                 "Номер измеренения",
-                                "Величина измерения",
+                                "град/сек",
                                 createSmoothFilterDataTypeG7(),
                                 PlotOrientation.VERTICAL,
                                 true, true, false);
