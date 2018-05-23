@@ -39,37 +39,37 @@ public class Reader extends JFrame {
 
     }
 
-    private JButton b1;
-    private JButton b2;
-    private JButton b3;
-    private JButton b4;
-    private JButton b5;
-    private JCheckBoxMenuItem AX = new JCheckBoxMenuItem("AX");
-    private JCheckBoxMenuItem AY = new JCheckBoxMenuItem("AY");
-    private JCheckBoxMenuItem AZ = new JCheckBoxMenuItem("AZ");
-    private JCheckBoxMenuItem AXafterFiltration = new JCheckBoxMenuItem("AX отфильтрованный");
-    private JCheckBoxMenuItem AYafterFiltration = new JCheckBoxMenuItem("AY отфильтрованный");
-    private JCheckBoxMenuItem AZafterFiltration = new JCheckBoxMenuItem("AZ отфильтрованный");
-    private JCheckBoxMenuItem GX = new JCheckBoxMenuItem("GX");
-    private JCheckBoxMenuItem GY = new JCheckBoxMenuItem("GY");
-    private JCheckBoxMenuItem GZ = new JCheckBoxMenuItem("GZ");
-    private JCheckBoxMenuItem GXafterFiltration = new JCheckBoxMenuItem("GX отфильтрованный");
-    private JCheckBoxMenuItem GYafterFiltration = new JCheckBoxMenuItem("GY отфильтрованный");
-    private JCheckBoxMenuItem GZafterFiltration = new JCheckBoxMenuItem("GZ отфильтрованный");
-    private JCheckBoxMenuItem pointsAX = new JCheckBoxMenuItem("Точки AX");
-    private JCheckBoxMenuItem pointsAY = new JCheckBoxMenuItem("Точки AY");
-    private JCheckBoxMenuItem pointsAZ = new JCheckBoxMenuItem("Точки AZ");
-    private JCheckBoxMenuItem pointsAXafterFiltration = new JCheckBoxMenuItem("Точки AX после фильтрации");
-    private JCheckBoxMenuItem pointsAYafterFiltration = new JCheckBoxMenuItem("Точки AY после фильтрации");
-    private JCheckBoxMenuItem pointsAZafterFiltration = new JCheckBoxMenuItem("Точки AZ после фильтрации");
-    private JCheckBoxMenuItem pointsGX = new JCheckBoxMenuItem("Точки GX");
-    private JCheckBoxMenuItem pointsGY = new JCheckBoxMenuItem("Точки GY");
-    private JCheckBoxMenuItem pointsGZ = new JCheckBoxMenuItem("Точки GZ");
-    private JCheckBoxMenuItem pointsGXafterFiltration = new JCheckBoxMenuItem("Точки GX после фильтрации");
-    private JCheckBoxMenuItem pointsGYafterFiltration = new JCheckBoxMenuItem("Точки GY после фильтрации");
-    private JCheckBoxMenuItem pointsGZafterFiltration = new JCheckBoxMenuItem("Точки GZ после фильтрации");
-    private JComboBox<Integer> smoothWindowTypeA = new JComboBox<>();
-    private JComboBox<Integer> smoothWindowTypeG = new JComboBox<>();
+    public static JButton b1;
+    public static JButton b2;
+    public static JButton b3;
+    public static JButton b4;
+    public static JButton b5;
+    public static JCheckBoxMenuItem AX = new JCheckBoxMenuItem("AX");
+    public static JCheckBoxMenuItem AY = new JCheckBoxMenuItem("AY");
+    public static JCheckBoxMenuItem AZ = new JCheckBoxMenuItem("AZ");
+    public static JCheckBoxMenuItem AXafterFiltration = new JCheckBoxMenuItem("AX отфильтрованный");
+    public static JCheckBoxMenuItem AYafterFiltration = new JCheckBoxMenuItem("AY отфильтрованный");
+    public static JCheckBoxMenuItem AZafterFiltration = new JCheckBoxMenuItem("AZ отфильтрованный");
+    public static JCheckBoxMenuItem GX = new JCheckBoxMenuItem("GX");
+    public static JCheckBoxMenuItem GY = new JCheckBoxMenuItem("GY");
+    public static JCheckBoxMenuItem GZ = new JCheckBoxMenuItem("GZ");
+    public static JCheckBoxMenuItem GXafterFiltration = new JCheckBoxMenuItem("GX отфильтрованный");
+    public static JCheckBoxMenuItem GYafterFiltration = new JCheckBoxMenuItem("GY отфильтрованный");
+    public static JCheckBoxMenuItem GZafterFiltration = new JCheckBoxMenuItem("GZ отфильтрованный");
+    public static JCheckBoxMenuItem pointsAX = new JCheckBoxMenuItem("Точки AX");
+    public static JCheckBoxMenuItem pointsAY = new JCheckBoxMenuItem("Точки AY");
+    public static JCheckBoxMenuItem pointsAZ = new JCheckBoxMenuItem("Точки AZ");
+    public static JCheckBoxMenuItem pointsAXafterFiltration = new JCheckBoxMenuItem("Точки AX после фильтрации");
+    public static JCheckBoxMenuItem pointsAYafterFiltration = new JCheckBoxMenuItem("Точки AY после фильтрации");
+    public static JCheckBoxMenuItem pointsAZafterFiltration = new JCheckBoxMenuItem("Точки AZ после фильтрации");
+    public static JCheckBoxMenuItem pointsGX = new JCheckBoxMenuItem("Точки GX");
+    public static JCheckBoxMenuItem pointsGY = new JCheckBoxMenuItem("Точки GY");
+    public static JCheckBoxMenuItem pointsGZ = new JCheckBoxMenuItem("Точки GZ");
+    public static JCheckBoxMenuItem pointsGXafterFiltration = new JCheckBoxMenuItem("Точки GX после фильтрации");
+    public static JCheckBoxMenuItem pointsGYafterFiltration = new JCheckBoxMenuItem("Точки GY после фильтрации");
+    public static JCheckBoxMenuItem pointsGZafterFiltration = new JCheckBoxMenuItem("Точки GZ после фильтрации");
+    public static JComboBox<Integer> smoothWindowTypeA = new JComboBox<>();
+    public static JComboBox<Integer> smoothWindowTypeG = new JComboBox<>();
 
     public static double[] elementsAX;
     public static double[] elementsAY;
@@ -178,28 +178,32 @@ public class Reader extends JFrame {
         file.add(exit);
 
         open.addActionListener(arg0 -> {
-            System.out.println("ActionListener.actionPerformed : open");
-            JFileChooser fileOpen = new JFileChooser();
-            FileNameExtensionFilter filter = new FileNameExtensionFilter(
-                    "Word & Excel", "xlsx");
-            fileOpen.setFileFilter(filter);
-            int ret = fileOpen.showDialog(null, "Открыть файл");
-            if (ret == JFileChooser.APPROVE_OPTION) {
-                File file1 = fileOpen.getSelectedFile();
-                try {
-                    FileInputStream fis = new FileInputStream(file1);
-                    wb = new XSSFWorkbook(fis);
-                    fis.close();
-                    readingData();
-                    JOptionPane.showMessageDialog(null, "Данные считаны");
-
-                    isOpen = true;
-                } catch (IOException e) {
-                    JOptionPane.showMessageDialog(null, "Файл содержит некорректные данные. Выберите другой файл.");
-                }
-            }
+            open();
         });
         return file;
+    }
+
+    private void open() {
+        System.out.println("ActionListener.actionPerformed : open");
+        JFileChooser fileOpen = new JFileChooser();
+        FileNameExtensionFilter filter = new FileNameExtensionFilter(
+                "Word & Excel", "xlsx");
+        fileOpen.setFileFilter(filter);
+        int ret = fileOpen.showDialog(null, "Открыть файл");
+        if (ret == JFileChooser.APPROVE_OPTION) {
+            File file1 = fileOpen.getSelectedFile();
+            try {
+                FileInputStream fis = new FileInputStream(file1);
+                wb = new XSSFWorkbook(fis);
+                fis.close();
+                readingData();
+                JOptionPane.showMessageDialog(null, "Данные считаны");
+
+                isOpen = true;
+            } catch (IOException e) {
+                JOptionPane.showMessageDialog(null, "Файл содержит некорректные данные. Выберите другой файл.");
+            }
+        }
     }
 
     private JMenu createGraphAXMenu() {
@@ -275,7 +279,6 @@ public class Reader extends JFrame {
     }
 
     private void readingData() {
-
         lastRowNum = wb.getSheetAt(0).getLastRowNum();
         for (int i = 1; i <= wb.getSheetAt(0).getLastRowNum(); i++) {
             if (!isNumeric(getCellText(wb.getSheetAt(0).getRow(i).getCell(0)))) {
@@ -328,8 +331,8 @@ public class Reader extends JFrame {
             elementsGZ[i - 1] = Double.parseDouble(getCellText(wb.getSheetAt(0).getRow(i).getCell(5))) / 131;
             System.out.println("data filled");
         }
-    }
 
+    }
 
     private XYDataset createDatasetTypeA() {
         System.out.println("Start of A method");
@@ -1098,12 +1101,12 @@ public class Reader extends JFrame {
                     JFileChooser fc = new JFileChooser();
                     fc.setFileFilter(filter);
                     ExcelSaver excelSaver = new ExcelSaver();
+                    String extension = ".xlsx";
                     if (fc.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {
-
                         try {
                             excelSaver.createAndSaveData(saveWorkbook, lastRowNum, elementsAX, elementsAY, elementsAZ, elementsGX, elementsGY, elementsGZ);
                             JOptionPane.showMessageDialog(null, "Все данные успешно обработаны");
-                            FileOutputStream fw = new FileOutputStream(fc.getSelectedFile());
+                            FileOutputStream fw = new FileOutputStream(fc.getSelectedFile() + extension);
                             saveWorkbook.write(fw);
                         } catch (IOException ex) {
                             System.out.println("Всё погибло!");

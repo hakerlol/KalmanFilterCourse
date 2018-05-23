@@ -1,23 +1,21 @@
 package com.Feller;
 
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Workbook;
 
-public class ExcelSaver implements Runnable {
+public class ExcelSaver {
     //  Workbook workbook = new HSSFWorkbook();
     // создание листа с названием "Просто лист"
     // Sheet sheet = workbook.createSheet("Просто лист");
-
+// создаем подписи к столбцам (это будет первая строчка в листе Excel файла)
     // заполняем список какими-то данными
     //  List<DataModel> dataList = fillData();
 
     // счетчик для строк
 
-    // создаем подписи к столбцам (это будет первая строчка в листе Excel файла)
-    private Workbook saveWorkbook = new HSSFWorkbook();
 
     public void createAndSaveData(Workbook workbook, int lastRowNum, double[] elementsAX, double[] elementsAY, double[] elementsAZ, double[] elementsGX, double[] elementsGY, double[] elementsGZ) {
+
         workbook.createSheet();
         SimpleMovingAverage simpleMovingAverage = new SimpleMovingAverage();
         Reader.DoingKalman doingKalman = new Reader.DoingKalman();
@@ -55,6 +53,7 @@ public class ExcelSaver implements Runnable {
         row.createCell(29).setCellValue("GZ после фильтрации методом скользящего среднего с коэффициентом 7");
         System.out.println("first rom is created");
         for (int i = 0; i < lastRowNum; i++) {
+
             Reader.elementsAXAfterKalman[i] = doingKalman.makeKalman(elementsAX)[i];
             Reader.elementsAYAfterKalman[i] = doingKalman.makeKalman(elementsAY)[i];
             Reader.elementsAZAfterKalman[i] = doingKalman.makeKalman(elementsAZ)[i];
@@ -121,8 +120,4 @@ public class ExcelSaver implements Runnable {
 
     }
 
-    @Override
-    public void run() {
-        createAndSaveData(Reader.saveWorkbook, Reader.lastRowNum, Reader.elementsAX, Reader.elementsAY, Reader.elementsAZ, Reader.elementsGX, Reader.elementsGY, Reader.elementsGZ);
-    }
 }
